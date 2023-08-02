@@ -4,6 +4,8 @@ import { getDatabase, ref, set } from "firebase/database";
 import { initializeApp } from "firebase/app";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { MenuPage } from './pages/MenuPage';
+import { AddMenu } from './pages/AddMenu';
+import { ChangePrice } from './pages/ChangePrice';
 
 
 function App() {
@@ -14,17 +16,19 @@ function App() {
   };
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-  // const db = getDatabase(app);
+  const db = getDatabase(app);
   // set(ref(db, 'menu/' + '2'), {
   //   username: 'tùng',
   //   email: 'email',
   //   profile_picture: 'imageUrl'
   // });
   return (
-    <div className="App">
+    <div className="">
       <Router>
         <Routes>
           <Route path='/' element={<MenuPage />} />
+          <Route path='/addItem' element={<AddMenu />}/>
+          <Route path='/changeprice' element={<ChangePrice />}/>
         </Routes>
       </Router>
     </div>
