@@ -1,23 +1,20 @@
+import { ref, set } from "firebase/database";
 import { Fragment, useState } from "react";
+import database from "../utils/db";
+import Input from "./Input";
 
 export function ThemItemSat() {
 
-    const [input, setInput] = useState(
-        {
-            tenhang: '',
-            size: '',
-            weight: ''
-        }
-    )
-    const { tenhang, size, weight } = input
-    const onchange = (e) => {
-        setInput({
-            ...input,
-            [e.target.name]: e.target.value
-        })
-    }
-    const onsubmit = (e) => {
-        e.preventDefault()
+    const [tenhang, setTenhang] = useState('')
+    const [size, setSize] = useState('')
+    const [weight, setWeight] = useState(0)
+
+    const onsubmit = () => {
+        set(ref(database, 'menu/sat/' + tenhang), {
+            tenhang: tenhang,
+            size: size,
+            weight: weight,
+        });
     }
     return (
         <Fragment>
@@ -26,19 +23,10 @@ export function ThemItemSat() {
             </div>
             <div className="container">
                 <form action="" onSubmit={onsubmit}>
-                    <div className="mb-3 text-left" >
-                        <label className="form-label" htmlFor="tenhang">Tên hàng</label>
-                        <input className="form-control" type="text" id="tenhang" value={tenhang} name="tenhang" onChange={(e) => { onchange(e) }} />
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label" htmlFor="size">kích thước</label>
-                        <input className="form-control" type="text" id="size" name="size" value={size} onChange={(e) => { onchange(e) }} />
-                    </div>
-                    <div className="mb-3">
-                        <label className="form-label" htmlFor="weight">khối lượng</label>
-                        <input className="form-control" type="text" id="weight" name="weight" value={weight} onChange={(e) => { onchange(e) }} />
-                    </div>
-                    <input type="submit" value="" />
+                    <Input title={'Tên hàng'} value={tenhang} id={'tenhang'} setValue={setTenhang}></Input>
+                    <Input title={'Khối lượng'} value={weight} id={'weight'} setValue={setWeight}></Input>
+                    <Input title={'Kích thước'} value={size} id={'size'} setValue={setSize}></Input>
+                    <button type="button" className="btn btn-primary" onClick={() => onsubmit()}>Tạo</button>
                 </form>
 
             </div>

@@ -9,19 +9,7 @@ import { ChangePrice } from './pages/ChangePrice';
 
 
 function App() {
-  const firebaseConfig = {
-    // ...
-    // The value of `databaseURL` depends on the location of the database
-    databaseURL: "https://nhat-quang-bd36d-default-rtdb.asia-southeast1.firebasedatabase.app/",
-  };
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
-  // set(ref(db, 'menu/' + '2'), {
-  //   username: 'tùng',
-  //   email: 'email',
-  //   profile_picture: 'imageUrl'
-  // });
+
   return (
     <div className="">
       <Router>
